@@ -51,12 +51,16 @@ class Calculator {
             if (previous === 0) {
                 operationValue = current
             }
+
+             // adicione o valor atual ao anterior
+    this.previousOperationText.innerText = `${operationValue} ${operation}`; //string concatenada com o valor mais a operação
         }
     }
+       
+}
     
     //colocando numeros da operação atual dentro do texto dessas operações atuais
-    
-}
+
 
 buttons.forEach(btn => {
     btn.addEventListener("click", (e) => {  //fazendo a caluculadora funcionar. evento de clique nos botões

@@ -1,7 +1,6 @@
-//linkando com o html 
 
 const previousOperationText = document.querySelector("#previous-operation");
-const currentOperationText = document.querySelector("#current-operation");
+const currentOperationText = document.querySelector("#current-operation");     //linkando com o html 
 const buttons = document.querySelectorAll("#buttons-container button");
 
 //conectar regra de negócios ao objeto. lógica da aplicação
@@ -12,10 +11,10 @@ class Calculator {
         this.currentOperation = "";                      //valor que está sendo digitado na hora
     }
 
-    addDigit(digit) {   //add números no visor
-        console.log(digit);
-        if (digit === "." && this.currentOperationText.innerText.includes(".")) {
-            return;
+    addDigit(digit) {   
+        console.log(digit);  //imprime o dígito no console
+        if (digit === "." && this.currentOperationText.innerText.includes(".")) {    //add números no visor
+            return;                                                                 //verifica se já existe um . digitado
         }
 
         this.currentOperation = digit;
@@ -27,7 +26,7 @@ class Calculator {
 
         //checando se o valor digitado está vazio. para mudar a operação a ser feita
         if (this.currentOperationText.innerText === "" && operation !== "C") {
-            if (this.currentOperationText.innerText !== "") {
+            if (this.previousOperationText.innerText !== "") {
                 //mudando a operação
                 this.changeOperation(operation);
             }
@@ -36,10 +35,10 @@ class Calculator {
 
         // pegando valor atual e anterior
         let operationValue;
-        const previous = +this.previousOperationText.innerText.split(" ")[0];
+        const previous = +this.previousOperationText.innerText.split(" ")[0];   //divide a string em array e pag o elemento desejado
         const current = +this.currentOperationText.innerText;
 
-        //executando operações
+        //executando operações através da estrutura de decisão 
         switch (operation) {
             case "+":
                 operationValue = previous + current //valor em cima + debaixo
@@ -75,7 +74,7 @@ class Calculator {
     }
 
 
-    //Mudança de valores vistos na calculador 
+    //Mudança de valores vistos na calculadora
     updateScreen(operationValue = null, operation = null, current = null, previous = null) //são valores nulo antes de serem enviados através da operação
     {
         if (operationValue === null) {
@@ -94,18 +93,18 @@ class Calculator {
 
     changeOperation(operation) {
         const mathOperations = ["*", "/", "+", "-"];
-        if (!mathOperations.includes(operation)) {     //verificando se a operação qeu o usuário digitou está entre as da calc
+        if (!mathOperations.includes(operation)) {     //verificando se a operação que o usuário digitou está entre as da calc
             return
         }
-        // podendo alterar a operação digitada
 
 
-        this.previousOperationText.innerText = this.previousOperationText.innerText.slice(0, -1) + operation;
+        this.previousOperationText.innerText = this.previousOperationText.innerText.slice(0, -1) + operation;         // podendo alterar a operação digitada
+
     }
 
 
     processDellOperator() {               //deletando o dígito
-        this.currentOperationText.innerText = this.currentOperationText.innerText.slice(0, -1);
+        this.currentOperationText.innerText = this.currentOperationText.innerText.slice(0, -1);   //remove o últimocaractere do string
     }
 
 
@@ -124,6 +123,7 @@ class Calculator {
         this.processOperation(operation);
     }
 }
+
 //colocando numeros da operação atual dentro do texto dessas operações atuais
 
 const calc = new Calculator(previousOperationText, currentOperationText)
@@ -139,6 +139,6 @@ buttons.forEach(btn => {
 
     });
 });
-// 
+
 
 
